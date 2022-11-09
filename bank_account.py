@@ -1,3 +1,12 @@
+def data_ver(balans):
+    while not balans.isdigit():
+        balans = int(input('Введите корректную сумму: '))
+    return balans
+
+# def test_data_ver():
+#     assert isinstance(data_ver())
+
+
 def bank():
     balans = 0
     history = []
@@ -39,3 +48,7 @@ def bank():
             break
         else:
             print('Неверный пункт меню')
+
+    return f'Ваш баланс равен {balans}'
+
+print(bank())
