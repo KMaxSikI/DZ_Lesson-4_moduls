@@ -1,12 +1,3 @@
-def data_ver(balans):
-    while not balans.isdigit():
-        balans = int(input('Введите корректную сумму: '))
-    return balans
-
-# def test_data_ver():
-#     assert isinstance(data_ver())
-
-
 def bank():
     balans = 0
     history = []
