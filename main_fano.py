@@ -1,4 +1,4 @@
-from Fano import *
+from fano import *
 
 alfa_file = open('alfabet.txt', 'r', encoding='utf-8')
 

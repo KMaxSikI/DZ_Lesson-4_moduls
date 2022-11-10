@@ -1,6 +1,6 @@
 
 
-from main import readalfa
+from main_fano import readalfa
 
 alfa_file = open('alfabet.txt', 'r', encoding='utf-8')
 shifr = open('shifr.txt', 'r', encoding='utf-8')
