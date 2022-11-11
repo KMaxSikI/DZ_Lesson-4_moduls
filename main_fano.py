@@ -17,5 +17,4 @@ def readalfa(file):
         raise ValueError
 
 
-if __name__ == '__main__':
-    print(readalfa(alfa_file))
+print(readalfa(alfa_file))

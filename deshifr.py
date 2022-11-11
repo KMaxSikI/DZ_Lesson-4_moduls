@@ -13,9 +13,7 @@ def desh(fshif, dict_alf):
         f = shifr_str[i:i+6].split()
         fano.extend(f)
         open_sifr += dict_alf.get(shifr_str[i:i+6]) + " "
-        #print(dict_alf.get(shifr_str[i:i+6]))
     return open_sifr
 
 print(desh(shifr, readalfa(alfa_file)))
 
-# desh(shifr, readalfa(alfa_file))
