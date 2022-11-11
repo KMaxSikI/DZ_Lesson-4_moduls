@@ -2,6 +2,7 @@ from read_text import d_d
 from deshifr import *
 from main_fano import readalfa
 from fano import *
+from console import *
 import os
 import shutil
 
@@ -25,4 +26,8 @@ def test_fano():
     assert type(direct_fano(lid_fano())) == bool
     assert lid_fano() == ['000001', '000011', '000010', '000100']
     assert type(lid_fano()) == list
+
+def test_console():
+    assert copy_folder('shifr.txt', 'shifr_new.txt') == 'shifr_new.txt'
+    assert viewer() == ['.git', '.idea', '.pytest_cache', 'venv', '__pycache__']
 
