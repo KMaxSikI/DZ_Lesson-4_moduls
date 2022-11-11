@@ -3,8 +3,6 @@ from deshifr import *
 from main_fano import readalfa
 from fano import *
 from console import *
-import os
-import shutil
 
 
 data = open('Data.txt', 'r', encoding='utf-8').readlines()
