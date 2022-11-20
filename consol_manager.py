@@ -1,5 +1,5 @@
 from victory import vic
-from bank_account import bank
+from bank_account import bank_acount
 import os
 import shutil
 
@@ -61,7 +61,7 @@ while True:
     elif choice == '9':
         vic()
     elif choice == '10':
-        bank()
+        bank_acount()
     elif choice == '11':
         os.chdir('D:\\PycharmProjects\\UII DZ\\DZ_Lesson 4_moduls\\new')
         print('Директрория изменилась на: ', os.getcwd())
