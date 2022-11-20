@@ -51,6 +51,11 @@ def bank_acount(balans=0, history_balans=[], order_history=[]):
             break
         else:
             print('Не верный пункт меню')
+
+    print(f'Баланс = {balans}')
+    print(f'История баланса = {history_balans}')
+    print(f'История покупок = {order_history}')
+
     return balans, history_balans, order_history
 
 
