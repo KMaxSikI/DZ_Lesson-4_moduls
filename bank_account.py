@@ -58,5 +58,5 @@ def bank_acount(balans=0, history_balans=[], order_history=[]):
 
     return balans, history_balans, order_history
 
-
-bank_acount()
+if __name__ == '__main__':
+    bank_acount()
