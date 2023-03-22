@@ -3,29 +3,27 @@ from bank_account import bank_acount
 import os
 import shutil
 
-def s_dir(show=True):
+'''
+В коде задействованы генераторы списков для более компактной записи циклов for. 
+Также используются тернарные операторы для проверки условия и выполнения действий 
+в зависимости от выбранного пункта меню.
+Вместо использования append() в списке lst_name, добавляем элементы в список через генератор списков, 
+чтобы уменьшить количество строк кода.
+Также убраны дублирование ввода названий папок и файлов, используя генераторы списков вместо циклов for.
+'''
 
-    lst_name = []
-    with os.scandir(os.getcwd()) as files:
-        for file in files:
-            if os.path.isdir(file):
-                if show:
-                    print('   ', file.name)
-                else:
-                    lst_name.append(file.name)
-    return lst_name
+
+def s_dir(show=True):
+    lst_name = [file.name if not show and os.path.isdir(file) else print('   ', file.name) for file in
+                os.scandir(os.getcwd())]
+    return [name for name in lst_name if name is not None]
+
 
 def s_file(show=True):
+    lst_name = [file.name if not show and os.path.isfile(file) else print('   ', file.name) for file in
+                os.scandir(os.getcwd())]
+    return [name for name in lst_name if name is not None]
 
-    lst_name = []
-    with os.scandir(os.getcwd()) as files:
-        for file in files:
-            if os.path.isfile(file):
-                if show:
-                    print('   ', file.name)
-                else:
-                    lst_name.append(file.name)
-    return lst_name
 
 while True:
     print('*' * 50)
@@ -44,41 +42,30 @@ while True:
     print('13. Выход')
     print('*' * 50)
 
-    choice = input('Выберете пунк меню: ')
+    choice = input('Выберете пункт меню: ')
     if choice == '1':
         kol = int(input('Введите количество создаваемых папок: '))
-        for i in range(kol):
-            name_fol = input('Введите название папки: ')
-            if not os.path.exists(name_fol):
-                os.mkdir(name_fol)
-            else:
-                print("Папка уже существует")
+        [os.mkdir(input('Введите название папки: ')) if not os.path.exists(input('Введите название папки: '))
+         else print("Папка уже существует") for i in range(kol)]
     elif choice == '2':
-        name_fol = input("Ввведите название папки/файла: ")
-        os.rmdir(name_fol)
+        os.rmdir(input("Введите название папки/файла: "))
     elif choice == '3':
         print("1. Скопировать файл")
         print("2. Скопировать папку")
         choice = input('Выберите пункт меню: ')
+        name_fol = input("Введите название папки/файла: ")
+        new_name_fol = input("Введите новое название папки/файла: ")
         if choice == '1':
-            file = input("Ввведите название файла: ")
-            new_file = input("Ввведите новое название файла: ")
-            shutil.copy(file, new_file)
-        if choice == '2':
-            name_fol = input("Ввведите название папки: ")
-            new_name_fol = input("Ввведите новое название папки: ")
-            if os.path.exists(name_fol):
-                shutil.copytree(name_fol, new_name_fol)
+            shutil.copy(name_fol, new_name_fol) if os.path.isfile(name_fol) else print(f"{name_fol} не является файлом")
+        elif choice == '2':
+            shutil.copytree(name_fol, new_name_fol) if os.path.isdir(name_fol) else print(
+                f"{name_fol} не является папкой")
     elif choice == '4':
         print(sorted(os.listdir()))
     elif choice == '5':
-        for fol in os.listdir():
-            if os.path.isdir(fol):
-                print(fol)
+        [print(fol) for fol in os.listdir() if os.path.isdir(fol)]
     elif choice == '6':
-        for on_file in os.listdir():
-            if os.path.isfile(on_file):
-                print(on_file)
+        [print(on_file) for on_file in os.listdir() if os.path.isfile(on_file)]
     elif choice == '7':
         print(os.name)
     elif choice == '8':
@@ -89,20 +76,11 @@ while True:
         bank_acount()
     elif choice == '11':
         os.chdir('D:\\PycharmProjects\\UII DZ\\DZ_Lesson 4_moduls\\new')
-        print('Директрория изменилась на: ', os.getcwd())
+        print('Директория изменилась на: ', os.getcwd())
     elif choice == '12':
         l_dir = s_dir(show=False)
         l_file = s_file(show=False)
-        data = 'files:'
-        sep_f_str = ' '
-        for i in l_file:
-            data += sep_f_str + i
-            sep_f_str = ', '
-        data += '\ndirs:'
-        sep_d_str = ' '
-        for i in l_dir:
-            data += sep_d_str + i
-            sep_d_str = ', '
+        data = f"files: {', '.join(i for i in l_file)}\ndirs: {', '.join(i for i in l_dir)}"
         with open('files_dirs.txt', 'w') as f:
             f.write(data)
     elif choice == '13':
